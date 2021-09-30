@@ -102,7 +102,7 @@ void ordenar(vector<int>& v);
 
 #### **Conjuntos**
 - **exclusivos**: O fiscal permitiu a entrada de um único representante de cada valor, ou seja, uma lista dos valores que aparecem na fila sem repetição. Que conjunto foi formado?
-    - ```[1, 3, 4, 3, -1, -2, -2] -> [1, 3, 4, -1, -3]```
+    - ```[1, 3, 4, 3, -1, -2, -2] -> [1, 3, 4, -1, -2]```
     - **diferentes**: Qual a lista dos diferentes níveis de stress que aparecem?
         - ```[1, 3, 4, 3, -1, -2, -2] -> [1, 3, 4]```
 
@@ -125,14 +125,14 @@ void ordenar(vector<int>& v);
 ### **Sequências**
 - **quantos_times** Duas ou mais pessoas do mesmo sexo seguidas podem formar um time. Quantos times existem na fila?
 - **maior_time** Qual o maior time que apareceu na fila?
-- **sozinhos** Quantas pessoas não estavam em um time?
+- **sozinho** Quantas pessoas não estavam em um time?
 
 #### **Grupos**
 - **casais**: Casais são formados quando quando um homem e uma mulher com o mesmo nível de stress são formados. O 3 e o -3 formam um casal. Os participantes fossem orientados a sair da fila e procurar seu par. Quantos casais poderiam ser formados?
-- **trios**: Pedimos pros participantes se organizassem em trios. Todos os 3 deveriam estar com o mesmo nível de stress.Quantos trios podem ser formados?
+- **trios**: Pedimos pros participantes se organizassem em trios. Todos os 3 deveriam estar com o mesmo nível de stress.Quantos trios podem ser formados?(abs)
 
 #### **Alteração**
 - **remove**: Dado a pessoa X, como fica a fila após remover X?
 - **insert**: Como fica a fila se eu inserir a pessoa X na posição Y.
-- **dance**: O coordenador disse: se você está do lado de alguém da com o mesmo nível de stress que você, saia da fila com ele. Quando os pares saiam, as vezes se formavam novos pares que também saíam. Quem ficou na fila?
+- **dance**: O coordenador disse: se você está do lado de alguém da com o mesmo nível de stress que você, saia da fila com ele. Quando os pares saiam, as vezes se formavam novos pares que também saíam. Quem ficou na fila?(abs)
 
