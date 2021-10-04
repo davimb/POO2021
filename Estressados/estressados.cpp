@@ -98,13 +98,15 @@ int procurar_menor_pos_apos(vector<int> fila, int P) {
 
 int procurar_melhor_se(vector<int> fila) {
     
-    int maior = -110, resp;
+    int menor = 110, resp = -1;
 
     for (int i = 0; i < (int)fila.size(); i++) {
-        maior = max(fila[i], maior);
     
-        if(maior ==  fila[i])
+        if(fila[i]<menor and fila[i] > 0) {
+            menor = fila[i];
             resp = i;
+        }
+        
     }
     return resp;
 
@@ -134,9 +136,11 @@ string mais_homens_ou_mulheres(vector<int> fila) {
             homem++;
     }
     if(homem > mulher)
-        return "mais homens";
+        return "homens";
+    else if(homem < mulher)
+        return "mulheres";
     else
-        return "mais mulheres";
+        return "empate";
 
 }
 
@@ -151,8 +155,10 @@ string qual_metade_eh_mais_estressada(vector<int> fila) {
     }
     if(stress>0)
         return "primeira metade";
-    else 
+    else if(stress<0)
         return "segunda metade";
+    else
+        return "empate";
 
 }
 
@@ -222,7 +228,7 @@ vector<int> pegar_mulheres_calmas(vector<int> fila) {
     vector<int> mcalmas;
     
     for (int i = 0; i < (int)fila.size(); i++) {
-        if(fila[i]<-10)
+        if(fila[i]>-10 and fila[i]<0)
             mcalmas.push_back(fila[i]);
     }
     return mcalmas;
@@ -302,43 +308,38 @@ void ordenar(vector<int>& fila) {
 //CONJUNTOS
 vector<int> exclusivos(vector<int> fila) {
 
-    vector<int> exclu;
-    exclu = clonar(fila);
-
-    for (int i = 0; i < (int)exclu.size() - 1; i++) {
-        for (int j = i+1; j < (int)exclu.size(); j++) {
+    for (int i = 0; i < (int)fila.size() - 1; i++) {
+        for (int j = i+1; j < (int)fila.size(); j++) {
             
-            if(exclu[i] == exclu[j]) {
-                exclu.erase(exclu.begin()+j);
+            if(fila[i] == fila[j]) {
+                fila.erase(fila.begin()+j);
                 j--;
 
             }
+            
         }
     }
-    return exclu;
+    return fila;
 
 }
 
 vector<int> diferentes(vector<int> fila) {
 
-    vector<int> dif;
-    dif = clonar(fila);
+    for (int i = 0; i < (int)fila.size() - 1; i++)
+        fila[i] = abs(fila[i]);
 
-    for (int i = 0; i < (int)dif.size() - 1; i++)
-        dif[i] = abs(dif[i]);
-
-    for (int i = 0; i < (int)dif.size() - 1; i++) {
-        for (int j = i+1; j < (int)dif.size(); j++) {
+    for (int i = 0; i < (int)fila.size() - 1; i++) {
+        for (int j = i+1; j < (int)fila.size(); j++) {
             
-            if(dif[i] == dif[j]){
-                dif.erase(dif.begin()+j); 
+            if(fila[i] == fila[j]){
+                fila.erase(fila.begin()+j); 
                 j--;
             }
 
         }
     }
 
-    return dif;
+    return fila;
 }
 
 vector<int> abandonados(vector<int> fila) {
@@ -382,28 +383,26 @@ vector<int> abandonados(vector<int> fila) {
 //MAP
 vector<int> sozinhos(vector<int> fila) {
     
-    vector<int> sozim;
-    sozim = clonar(fila);
     int cont = 0;
 
-    for (int i = 0; i < (int)sozim.size() - 1; i++) {
-        for (int j = i+1; j < (int)sozim.size(); j++) {
+    for (int i = 0; i < (int)fila.size() - 1; i++) {
+        for (int j = i+1; j < (int)fila.size(); j++) {
 
-            if(abs(sozim[i]) == abs(sozim[j])) {
-                sozim.erase(sozim.begin()+j);
+            if(abs(fila[i]) == abs(fila[j])) {
+                fila.erase(fila.begin()+j);
                 cont = 1;
                 j--;
             }
 
         }
         if(cont == 1){
-            sozim.erase(sozim.begin()+i);
+            fila.erase(fila.begin()+i);
             i--;
         }
         cont = 0;
         
     }
-    return sozim;
+    return fila;
 
 }
 
@@ -594,15 +593,13 @@ int sozinho(vector<int> fila) {
 //GRUPOS
 int casais(vector<int> fila) {
     
-    vector<int> casal;
-    casal = clonar(fila);
     int contador = 0, cont = 0;
     
-    for (int i = 0; i < (int)casal.size() - 1; i++) {
-        for (int j = i+1; j < (int)casal.size(); j++) {
+    for (int i = 0; i < (int)fila.size() - 1; i++) {
+        for (int j = i+1; j < (int)fila.size(); j++) {
             
-            if(casal[i] == -casal[j]) {
-                casal.erase(casal.begin()+j);
+            if(fila[i] == -fila[j]) {
+                fila.erase(fila.begin()+j);
                 cont = 1;
                 j--;
                 contador++;
@@ -610,7 +607,7 @@ int casais(vector<int> fila) {
             }
         }
         if(cont == 1) {
-            casal.erase(casal.begin()+i);
+            fila.erase(fila.begin()+i);
             i--;
         }
         cont = 0;
@@ -621,32 +618,29 @@ int casais(vector<int> fila) {
 }
 
 int trios(vector<int> fila) {
-    vector<int> exclu;
-    exclu = clonar(fila);
-    int contador = 0, cont = 0;
     
-    for (int i = 0; i < (int)exclu.size() - 1; i++) {
-        for (int j = i+1; j < (int)exclu.size(); j++) {
+    int contador = 0, cont = 0;
 
+    for (int i = 0; i < (int)fila.size() - 1; i++) {
+        for (int j = i+1; j < (int)fila.size(); j++) {
+
+            if(abs(fila[i]) == abs(fila[j])) {
+                fila.erase(fila.begin()+j);
+                cont++;
+                j--;
+            }
             if(cont == 2) {
                 contador++;
                 break;
             }
-            if(abs(exclu[i]) == abs(exclu[j])) {
-                exclu.erase(exclu.begin()+j);
-                cont++;
-                j--;
-            }
-            
         }
-        if(cont == 1) {
-            exclu.erase(exclu.begin()+i);
-            i--;
-        }
+        fila.erase(fila.begin()+i);
+        i--;
         cont = 0;
 
     }
     return contador;
+
 }
 
 //ALTERACAO
@@ -701,7 +695,7 @@ void dance(vector<int>&fila) {
 
 int main () {
 
-    vector<int> exemplo = {1,-1,2,12,1,2,1};
+    vector<int> exemplo = {10,1,2,-5,-5,-5};
 
     for (int i = 0; i < (int)exemplo.size(); i++) 
         cout<<exemplo[i]<<" ";
