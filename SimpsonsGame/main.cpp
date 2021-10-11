@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+using namespace std;
 
 void setSize(sf::Sprite& sprite, int width, int height) {
 
@@ -89,12 +90,15 @@ int main() {
     sf::Texture rosquinha_tex { loadTexture("rosquinha.png") };
     sf::Texture homer_tex { loadTexture("homer.png") };
     sf::Texture spring_tex { loadTexture("springfield.jpg") };
+    sf::Texture rosmer_tex { loadTexture("rosmer.png") };
+    bool aux=0;
 
     const int STEP {100};
 
     Entity rosquinha(2, 2, STEP, rosquinha_tex);
     Entity homer(0, 0, STEP, homer_tex);
     Board board(7, 5, STEP, spring_tex);
+    Entity rosmer(0, 0, STEP, rosmer_tex);
 
     sf::RenderWindow window(sf::VideoMode(board.nc * STEP, board.nl * STEP), "SFML works!");
 
@@ -104,17 +108,37 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
-            } else if (event.type == sf::Event::KeyPressed) {
-                moveEntity(event.key.code, rosquinha, {sf::Keyboard::Left, sf::Keyboard::Up, sf::Keyboard::Right, sf::Keyboard::Down});
-                moveEntity(event.key.code, homer, {sf::Keyboard::A, sf::Keyboard::W, sf::Keyboard::D, sf::Keyboard::S});
             }
+            else if (event.type == sf::Event::KeyPressed and aux==0) {
+                moveEntity(event.key.code, rosquinha, {sf::Keyboard::Left, sf::Keyboard::Up, sf::Keyboard::Right, sf::Keyboard::Down});
 
+                if (homer.x == rosquinha.x and homer.y == rosquinha.y) {
+                    rosmer.x = homer.x;
+                    rosmer.y = homer.y;
+                    aux=1;
+                }
+
+                moveEntity(event.key.code, homer, {sf::Keyboard::A, sf::Keyboard::W, sf::Keyboard::D, sf::Keyboard::S});
+
+                if (homer.x == rosquinha.x and homer.y == rosquinha.y) {
+                    rosmer.x = homer.x;
+                    rosmer.y = homer.y;
+                    aux=1;
+                }
+            }
+            else if (event.type == sf::Event::KeyPressed and aux==1) {
+                moveEntity(event.key.code, rosmer, {sf::Keyboard::Left, sf::Keyboard::Up, sf::Keyboard::Right, sf::Keyboard::Down});
+            }
         }
-
         window.clear();
         board.draw(window);
+        if(aux==0) {
         rosquinha.draw(window);
         homer.draw(window);
+        }
+        else {
+        rosmer.draw(window);
+        }
         window.display();
     }
     return 0;
