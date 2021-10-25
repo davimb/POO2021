@@ -61,7 +61,6 @@ struct Board {
     Pincel pincel;
 
     Board(sf::RenderWindow& window) : window {window}, pincel {window} {
-        bubbles.push_back(Bubble(100, 200, 'A', 2));
     }
 
     void update() {
@@ -101,9 +100,10 @@ struct Board {
             if(bubble.letter==letter){
                 bubble.alive = false;
                 this->hits++;
-                break;
+                return;
             }
         }
+        this->misses++;
     }
 
     bool check_new_bubbles() {
@@ -138,8 +138,12 @@ struct Board {
 struct Game {
     sf::RenderWindow window;
     Board board;
+    function<void()> on_update;
 
     Game() : window(sf::VideoMode(800,600), "Bubbles"), board(window) {
+        this->on_update = [&]() {
+            this->gameplay();
+        };
         window.setFramerateLimit(60);
     }
 
@@ -156,17 +160,30 @@ struct Game {
         }
     }
 
-    void draw() {
+    void gameplay() {
         board.update();
         window.clear(sf::Color::Black);
         board.draw();
+        window.display();
+
+        if(board.misses > 10) {
+            this->on_update = [&]() {
+                this->gameover();
+            };
+        }
+    }
+
+    void gameover() {
+        Pincel pincel(window);
+        window.clear(sf::Color::Red);
+        pincel.write("Game over", 230, 230, 100, sf::Color::Black);
         window.display();
     }
 
     void main_loop() {
         while(window.isOpen()) {
             process_events();
-            draw();
+            on_update();
         }
     }
 
