@@ -9,7 +9,7 @@ public:
     string dureza{""};
     int tamanho{0};
 
-    int desgastePorFolha(string dureza);
+    int desgastePorFolha();
 
 };
 
@@ -22,15 +22,16 @@ public:
     void inserir(float cal, string dur, int tam);
     void ToString();
     void remover();
-    int write(int quant);
+    void write(int quant);
 
 };
 
-int desgastePorFolha(string dureza) {
+int Grafite::desgastePorFolha() {
     if(dureza=="HB") return 1;
     else if(dureza=="2B") return 2;
     else if(dureza=="4B") return 4;
     else if(dureza=="6B") return 6;
+    return 0;
 }
 
 void Lapiseira::inserir(float cal, string dur, int tam) {
@@ -55,31 +56,33 @@ void Lapiseira::remover() {
     this->grafite.tamanho = 0;
 }
 
-int Lapiseira::write(int quant) {
-    int desgaste=desgastePorFolha(this->grafite.dureza);
+void Lapiseira::write(int quant) {
+    int desgaste=grafite.desgastePorFolha();
     int cont=0;
     
-    for(int i=0; i<quant; i++) {
-        if(this->grafite.tamanho-desgaste>=0) {
+    if(this->grafite.tamanho==0) {
+        cout<<"fail: sem grafite"<<endl;
+        return;
+    }
+
+    for (int i=0; i<quant; i++) {
+        if (this->grafite.tamanho-desgaste>=0) {
             this->grafite.tamanho-=desgaste;
             cont++;
         }
         else {
             this->grafite.tamanho=0;
-            return cont;
+            cout<<"fail: folhas escritas completamente: "<<cont<<endl<<"warning: grafite acabou"<<endl;
+            return;
         }
     }
 
-    if(this->grafite.tamanho-desgaste<=0) return -1;
-    return cont;
+    if(this->grafite.tamanho<desgaste) cout<<"warning: grafite acabou"<<endl;
 }
 
 int main(){
 
     string comando = "";
-    float cal;
-    string dur;
-    int tam, quant;
     Lapiseira *lapis1 = new Lapiseira();   
     
     while (comando!="end") {
@@ -87,10 +90,12 @@ int main(){
         cin>>comando;
 
         if(comando=="init") {
-            cin>>cal;
-            lapis1->calibre = cal;
+            cin>>lapis1->calibre;
         }
         else if(comando=="inserir") {
+            float cal;
+            string dur;
+            int tam;
             cin>>cal>>dur>>tam;
             if(lapis1->grafite.tamanho!=0) {
                 cout<<"fail: ja existe grafite"<<endl;
@@ -110,10 +115,10 @@ int main(){
             lapis1->remover();
         }
         else if(comando=="write") {
+            int quant;
             cin>>quant;
-            tam=lapis1->write(quant);
-            if(tam!=quant and tam!=-1) cout<<"fail:folhas escritas completamente: "<<tam<<endl<<"warning: grafite acabou"<<endl;
-            if(tam==-1) cout<<"warning: grafite acabou"<<endl;
+            lapis1->write(quant);
         }
     }
+    delete lapis1;
 }
