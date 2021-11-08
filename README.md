@@ -18,7 +18,7 @@
 | Motoca | [Motoca][] |
 | --- | --- |
 
-| DigitacaoGame | [Lapiseira][] |
+| DigitacaoGame | [JogoDigitacao][] |
 | --- | --- |
 
 [Aula 1]: https://github.com/davimb/POO_UFC/tree/main/Aula%201
