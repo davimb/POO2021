@@ -5,6 +5,7 @@ using namespace std;
 class Grafite {
 
 public:
+    Grafite(){};
     float calibre{0};
     string dureza{""};
     int tamanho{0};
@@ -16,6 +17,7 @@ public:
 class Lapiseira {
 
 public:
+    Lapiseira(){};
     float calibre;
     Grafite grafite;
 
