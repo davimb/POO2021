@@ -30,26 +30,54 @@ struct Bubble {
     int y;
     char letter;
     int speed;
+    int shape;
+    int random;
 
     bool alive {true};
     static const int radius {20};
 
-    Bubble(int x, int y, char letter, int speed) : x{x}, y{y}, letter{letter}, speed{speed} {
+    Bubble(int x, int y, char letter, int speed, int shape) : x{x}, y{y}, letter{letter}, speed{speed}, shape{shape} {
     }
 
     void update() {
         y += speed;
     }
 
+    function<void()> shapes;
+
     void draw(sf::RenderWindow& window) {
-        sf::CircleShape circle(Bubble::radius);
-        circle.setPosition(x, y);
-        circle.setFillColor(sf::Color::White);
-        window.draw(circle);
+
+        if(shape==0) {
+            this->shapes = [&]() {
+                this->createrect(window);
+                };
+        }
+        else{
+            this->shapes = [&]() {
+                this->createcircle(window);
+            };
+        }
+
+        shapes();
 
         static Pincel pincel(window);
         pincel.write(string(1, letter), x+0.5*Bubble::radius, y, Bubble::radius*2, sf::Color::Blue);
     }
+
+    void createcircle(sf::RenderWindow& window) {
+        sf::CircleShape circle(1.2*Bubble::radius, 4);
+        circle.setPosition(x, y);
+        circle.setFillColor(sf::Color::White);
+        window.draw(circle);
+    }
+
+    void createrect(sf::RenderWindow& window) {
+        sf::RectangleShape rect(sf::Vector2f(1.8*Bubble::radius, 1.8*Bubble::radius));
+        rect.setPosition(x, y+2);
+        rect.setFillColor(sf::Color::White);
+        window.draw(rect);
+    }
+
 };
 
 struct Board {
@@ -58,6 +86,7 @@ struct Board {
     vector<Bubble> bubbles;
     int hits {0};
     int misses {0};
+    int cont{0};
     Pincel pincel;
 
     Board(sf::RenderWindow& window) : window {window}, pincel {window} {
@@ -100,6 +129,11 @@ struct Board {
             if(bubble.letter==letter){
                 bubble.alive = false;
                 this->hits++;
+                this->cont++;
+                if(cont==10) {
+                    this->misses--;
+                    this->cont = 0;
+                }
                 return;
             }
         }
@@ -123,7 +157,8 @@ struct Board {
         int y = -2 * Bubble::radius;
         int speed = rand() % 5 + 1;
         char letter = rand() % 26 + 'A';
-        bubbles.push_back(Bubble(x, y, letter, speed));
+        int shape = rand()%2;
+        bubbles.push_back(Bubble(x, y, letter, speed, shape));
 
     }
     void draw() {
