@@ -3,22 +3,22 @@
 ## - Programação orientada a objetos da turma de ciência da computação da UFC
 
 
-| Atv 1 | [Aula 1][] |
+| Atividade 1 | [Aula 1][] |
 | --- | --- |
 
-| Atv 2 | [Estressados][] |
+| Atividade 2 | [Estressados][] |
 | --- | --- |
 
-| Atv 3 | [SimpsonsGame][] |
+| Atividade 3 | [SimpsonsGame][] |
 | --- | --- |
 
-| Atv 4 | [Lapiseira][] |
+| Atividade 4 | [Lapiseira][] |
 | --- | --- |
 
-| Atv 5 | [Motoca][] |
+| Atividade 5 | [Motoca][] |
 | --- | --- |
 
-| Atv 6 | [JogoDigitacao][] |
+| Atividade 6 | [JogoDigitacao][] |
 | --- | --- |
 
 [Aula 1]: https://github.com/davimb/POO_UFC/tree/main/Aula%201
