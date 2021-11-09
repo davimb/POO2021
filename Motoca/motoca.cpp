@@ -19,81 +19,77 @@ class Motorcycle {
     public:
         int power {1};
         int time{0};
-        vector<shared_ptr<Person>> vagao;
+        vector<shared_ptr<Person>> fila;
 
-        Motorcycle() : vagao(5, nullptr){}
+        Motorcycle() : fila(5, nullptr){}
 
         void in(shared_ptr<Person> person) {
-            for(int i=0; i<(int)vagao.size(); i++) {
-                if(vagao[i]==nullptr) {
-                    vagao[i] = person;
+            for (int i=0; i<(int)fila.size(); i++) {
+                if (fila[i]==nullptr) {
+                    fila[i] = person;
                     return;
                 }
             }
-            cout<<"fail: vagao cheio"<<endl;
+            cout<<"fail: fila cheio"<<endl;
         }
 
         void out() {
-            if(vagao[0]==nullptr) {
-                cout<<"fail: vagao ja esta vazio"<<endl;
+            if (fila[0]==nullptr) {
+                cout<<"fail: fila ja esta vazia"<<endl;
                 return;
             }
-            vagao[0] = nullptr;
-            power = 1;
+            fila[0] = nullptr;
             time = 0;
-            vagao.erase(vagao.begin());
-            vagao.push_back(nullptr);
+            fila.erase(fila.begin());
+            fila.push_back(nullptr);
         }
 
         void drive(int time) {
-            if(vagao[0]==nullptr) {
+            if (fila[0]==nullptr) {
                 cout<<"fail: moto vazia"<<endl;
                 return;
         }
             else {
-                if(vagao[0]->age > 10) 
+                if (fila[0]->age > 10) 
                     cout<<"fail: muito grande para andar de moto"<<endl;   
                 else if(this->time < time) {
-                    cout<<"fail: "<<vagao[0]->name<<" andou "<<this->time<<" e acabou o tempo"<<endl;
+                    cout<<"fail: "<<fila[0]->name<<" andou "<<this->time<<" e acabou o tempo"<<endl;
                     this->time = 0;
                 }
                 else
                     this->time-=time;
             }
-            if(this->time==0) {
+            if (this->time==0) {
                 cout<<"warning: tempo zerado"<<endl;
             }
         }
         
         void honk() {
-            if(vagao[0]!=nullptr) {
+            if (fila[0]!=nullptr) {
                 cout<<"P";
                 for(int i=0; i<power; i++) cout<<"e";
                 cout<<"m";
             }
             else
-                cout<<"fail: vagao vazio";
+                cout<<"fail: fila vazia";
         }
 
         friend ostream& operator<<(ostream& os, const Motorcycle& m) {
+            os<<"potencia: "<<m.power<<", minutos: "<<m.time<<", pessoa: [[";
             int i = 0;
-            for(auto person : m.vagao) {
+            for (auto person : m.fila) {
+                if (person!=nullptr)
+                    os<<*person<<"]";
+                else
+                    os<<"null"<<"]";
+                if (i<(int)m.fila.size()-1) {
+                    os<<", [";
                 i++;
-                if(person!=nullptr and i==1) {
-                    os<<"vagao "<<i<<"->potencia: "<<m.power<<", minutos: "<<m.time<<", pessoa: ["<<*person<<"]"<<endl;
-                }
-                else if(i==1) {
-                    os<<"vagao "<<i<<"->potencia: "<<m.power<<", minutos: "<<m.time<<", pessoa: [null]"<<endl;
-                }
-                else if(person!=nullptr) {
-                    os<<"vagao "<<i<<"->potencia: 1, minutos: 0, pessoa: ["<<*person<<"]"<<endl;
-                }
-                else {
-                    os<<"vagao "<<i<<"->potencia: 1, minutos: 0, pessoa: [null]"<<endl;
                 }
             }
+            os<<"]";
             return os;
-    }
+        }
 };
 
 int main () {
