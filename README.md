@@ -3,22 +3,22 @@
 ## - Programação orientada a objetos da turma de ciência da computação da UFC
 
 
-| Teste c++20 | [Aula 1][] |
+| Atv 1 | [Aula 1][] |
 | --- | --- |
 
-| Estressados 1,2,3 | [Estressados][] |
+| Atv 2 | [Estressados][] |
 | --- | --- |
 
-| Lobinho | [SimpsonsGame][] |
+| Atv 3 | [SimpsonsGame][] |
 | --- | --- |
 
-| Lapiseira | [Lapiseira][] |
+| Atv 4 | [Lapiseira][] |
 | --- | --- |
 
-| Motoca | [Motoca][] |
+| Atv 5 | [Motoca][] |
 | --- | --- |
 
-| DigitacaoGame | [JogoDigitacao][] |
+| Atv 6 | [JogoDigitacao][] |
 | --- | --- |
 
 [Aula 1]: https://github.com/davimb/POO_UFC/tree/main/Aula%201
