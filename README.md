@@ -18,9 +18,15 @@
 | Atividade 5 | [Lapiseira][] |
 | --- | --- |
 
-[Aula 1]: https://github.com/davimb/POO_UFC/tree/main/Aula%201
+| Atividade 6 | [Lapiseira][] |
+| --- | --- |
+
+| Atividade 7 | [Cinema][] |
+| --- | --- |
+
 [Estressados]: https://github.com/davimb/POO_UFC/tree/main/Estressados
 [SimpsonsGame]: https://github.com/davimb/POO_UFC/tree/main/SimpsonsGame
-[Lapiseira]: https://github.com/davimb/POO_UFC/tree/main/SimpsonsGame
-[Motoca]: https://github.com/davimb/POO_UFC/tree/main/Motoca
 [JogoDigitacao]: https://github.com/davimb/POO_UFC/tree/main/JogoDigitacao
+[Motoca]: https://github.com/davimb/POO_UFC/tree/main/Motoca
+[Lapiseira]: https://github.com/davimb/POO_UFC/tree/main/SimpsonsGame
+[Cinema]: https://github.com/davimb/POO_UFC/tree/main/Cinema
