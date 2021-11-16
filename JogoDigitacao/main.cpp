@@ -1,7 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include <bits/stdc++.h>
+#include <SFML/Audio.hpp>
 
 using namespace std;
+
+void setSize(sf::Sprite& sprite, int width, int height) {
+
+    auto dim = sprite.getLocalBounds();
+    sprite.setScale((float) width / dim.width, (float) height / dim.height);
+
+}
 
 struct Pincel {
 
@@ -10,18 +18,34 @@ struct Pincel {
     sf::RenderWindow& window;
 
         Pincel(sf::RenderWindow& window) : window{window} {
-            if(!font.loadFromFile("hocus.ttf"))
+            if(!font.loadFromFile("fonts/04B_30__.ttf"))
                 cout<<"Font Loader error";
             text.setFont(font);
         }
 
-        void write(string str, int x, int y, int size, sf::Color color) {
+        void write(string str, int x, int y, int size, int cont) {
             text.setString(str);
             text.setCharacterSize(size);
             text.setPosition(x, y);
-            text.setFillColor(color);
+            if(cont==0)
+               text.setFillColor(sf::Color::White);
+            else if(cont==1)
+                text.setFillColor(sf::Color::Yellow);
+            else if(cont==2)
+                text.setFillColor(sf::Color::Red);
+            else if(cont==3)
+                text.setFillColor(sf::Color::Blue);
+            else if(cont==4)
+                text.setFillColor(sf::Color::Green);
+            else if(cont==5)
+                text.setFillColor(sf::Color::Magenta);
+            else if(cont==6)
+                text.setFillColor(sf::Color::Cyan);
+            else if(cont==7)
+                text.setFillColor(sf::Color::Black);
             window.draw(text);
         }
+
 };
 
 struct Bubble {
@@ -30,52 +54,21 @@ struct Bubble {
     int y;
     char letter;
     int speed;
-    int shape;
-    int random;
 
     bool alive {true};
     static const int radius {20};
 
-    Bubble(int x, int y, char letter, int speed, int shape) : x{x}, y{y}, letter{letter}, speed{speed}, shape{shape} {
+    Bubble(int x, int y, char letter, int speed) : x{x}, y{y}, letter{letter}, speed{speed} {
     }
 
     void update() {
         y += speed;
     }
 
-    function<void()> shapes;
-
     void draw(sf::RenderWindow& window) {
-
-        if(shape==0) {
-            this->shapes = [&]() {
-                this->createrect(window);
-                };
-        }
-        else{
-            this->shapes = [&]() {
-                this->createcircle(window);
-            };
-        }
-
-        shapes();
-
         static Pincel pincel(window);
-        pincel.write(string(1, letter), x+0.5*Bubble::radius, y, Bubble::radius*2, sf::Color::Blue);
-    }
-
-    void createcircle(sf::RenderWindow& window) {
-        sf::CircleShape circle(1.2*Bubble::radius, 4);
-        circle.setPosition(x, y);
-        circle.setFillColor(sf::Color::White);
-        window.draw(circle);
-    }
-
-    void createrect(sf::RenderWindow& window) {
-        sf::RectangleShape rect(sf::Vector2f(1.8*Bubble::radius, 1.8*Bubble::radius));
-        rect.setPosition(x, y+2);
-        rect.setFillColor(sf::Color::White);
-        window.draw(rect);
+        int cont = rand() % 8;
+        pincel.write(string(1, letter), x, y, Bubble::radius*3, cont);
     }
 
 };
@@ -129,7 +122,8 @@ struct Board {
             if(bubble.letter==letter){
                 bubble.alive = false;
                 this->hits++;
-                this->cont++;
+                if(this->misses>0)
+                    this->cont++;
                 if(cont==10) {
                     this->misses--;
                     this->cont = 0;
@@ -155,15 +149,14 @@ struct Board {
     void add_new_bubble() {
         int x = rand() % ((int)window.getSize().x - 2*Bubble::radius);
         int y = -2 * Bubble::radius;
-        int speed = rand() % 5 + 1;
+        int speed = rand() % 3 + 3;
         char letter = rand() % 26 + 'A';
-        int shape = rand()%2;
-        bubbles.push_back(Bubble(x, y, letter, speed, shape));
+        bubbles.push_back(Bubble(x, y, letter, speed));
 
     }
     void draw() {
-        pincel.write("Hits: " + to_string(this->hits) + " Misses: " + to_string(this->misses), 10, 10, 20, sf::Color::White);
-        pincel.write("Bubbles: " + to_string(this->bubbles.size()), 10, 30, 20, sf::Color::White);
+        pincel.write("Hits: " + to_string(this->hits) + " Misses: " + to_string(this->misses), 10, 10, 20, 0);
+        pincel.write("Bubbles: " + to_string(this->bubbles.size()), 10, 30, 20, 0);
         for(Bubble& bubble : bubbles) {
             bubble.draw(window);
         }
@@ -174,8 +167,9 @@ struct Game {
     sf::RenderWindow window;
     Board board;
     function<void()> on_update;
+    sf::Sprite sprite;
 
-    Game() : window(sf::VideoMode(800,600), "Bubbles"), board(window) {
+    Game(sf::Sprite sprite) : window(sf::VideoMode(900,650), "Bubbles"), board(window), sprite{sprite} {
         this->on_update = [&]() {
             this->gameplay();
         };
@@ -198,6 +192,7 @@ struct Game {
     void gameplay() {
         board.update();
         window.clear(sf::Color::Black);
+        window.draw(sprite);
         board.draw();
         window.display();
 
@@ -211,7 +206,7 @@ struct Game {
     void gameover() {
         Pincel pincel(window);
         window.clear(sf::Color::Red);
-        pincel.write("Game over", 230, 230, 100, sf::Color::Black);
+        pincel.write("Game over", 200, 200, 70, 7);
         window.display();
     }
 
@@ -225,7 +220,20 @@ struct Game {
 };
 
 int main () {
-    Game game;
+    sf::Texture texture;
+    if (!texture.loadFromFile("images/fundo.jpg")) {
+        cout << "Error loading texture" << endl;
+        exit(1);
+    }
+    sf::Sprite sprite(texture);
+    setSize(sprite, 900, 650);
+    sprite.setPosition(0, 0);
+
+    Game game(sprite);
+
+sf::Music music;
+music.openFromFile("music.ogg");
+music.play();
     game.main_loop();
 
 }
