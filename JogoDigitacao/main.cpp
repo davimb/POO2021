@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <bits/stdc++.h>
-#include <SFML/Audio.hpp>
 
 using namespace std;
 
@@ -230,10 +229,6 @@ int main () {
     sprite.setPosition(0, 0);
 
     Game game(sprite);
-
-sf::Music music;
-music.openFromFile("music.ogg");
-music.play();
     game.main_loop();
 
 }
