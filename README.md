@@ -18,7 +18,7 @@
 | Atividade 5 | [Lapiseira][] |
 | --- | --- |
 
-| Atividade 6 | [Lapiseira][] |
+| Atividade 6 | [Ppula][] |
 | --- | --- |
 
 | Atividade 7 | [Cinema][] |
@@ -29,4 +29,5 @@
 [JogoDigitacao]: https://github.com/davimb/POO_UFC/tree/main/JogoDigitacao
 [Motoca]: https://github.com/davimb/POO_UFC/tree/main/Motoca
 [Lapiseira]: https://github.com/davimb/POO_UFC/tree/main/SimpsonsGame
+[Ppula]:https://github.com/davimb/POO_UFC/tree/main/Ppula
 [Cinema]: https://github.com/davimb/POO_UFC/tree/main/Cinema
