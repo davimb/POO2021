@@ -28,15 +28,16 @@ class Kid {
 
 class Trampoline {
     private:
-        list<Kid> play;
-        list<Kid> wait;
+        list<shared_ptr<Kid>> play;
+        list<shared_ptr<Kid>> wait;
 
     public:
         Trampoline() {}
         
-        void arrive(Kid kid) {
+        void arrive(shared_ptr<Kid> kid) {
             wait.push_back(kid);
         }
+
         void in() {
             if(wait.empty()) {
                 cout<<"fail: nao ha mais criancas na fila de espera"<<endl;
@@ -45,6 +46,7 @@ class Trampoline {
             play.push_back(wait.front());
             wait.pop_front();
         }
+        
         void out() {
             if(play.empty()) {
                 cout<<"fail: nao ha mais criancas no pula pula"<<endl;
@@ -53,9 +55,10 @@ class Trampoline {
             wait.push_back(play.front());
             play.pop_front();
         }
+        
         void remove() {
             if(wait.empty()) {
-                cout<<"fail: nao ha mais criancas para remover"<<endl;
+                cout<<"fail: nao ha mais criancas para remover da fila de espera"<<endl;
                 return;
             }
             wait.pop_front();
@@ -63,16 +66,16 @@ class Trampoline {
         
         friend ostream& operator<<(ostream& os, const Trampoline& t) {
             os<<"=> ";
-            list<Kid> temp;
+            list<shared_ptr<Kid>> temp;
             temp = t.wait;
             while (!temp.empty()) {
-                cout<<temp.back()<<" ";
+                cout<<*temp.back()<<" ";
                 temp.pop_back();
             }
             cout<<"=> [ ";
             temp = t.play;
             while (!temp.empty()) {
-                cout<<temp.back()<<" ";
+                cout<<*temp.back()<<" ";
                 temp.pop_back();
             }
             cout<<"]"<<endl;
@@ -92,8 +95,7 @@ int main ()  {
             string name;
             int age;
             cin>>name>>age;
-            Kid kid(name, age);
-            trampoline.arrive(kid);
+            trampoline.arrive(make_shared<Kid>(name, age));
         }
         else if (cmd=="in") {
             trampoline.in();
