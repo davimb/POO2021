@@ -24,6 +24,9 @@
 | Atividade 7 | [Cinema][] |
 | --- | --- |
 
+| Atividade 8 | [Contato][] |
+| --- | --- |
+
 [Estressados]: https://github.com/davimb/POO_UFC/tree/main/Estressados
 [SimpsonsGame]: https://github.com/davimb/POO_UFC/tree/main/SimpsonsGame
 [JogoDigitacao]: https://github.com/davimb/POO_UFC/tree/main/JogoDigitacao
@@ -31,3 +34,4 @@
 [Lapiseira]: https://github.com/davimb/POO_UFC/tree/main/SimpsonsGame
 [Ppula]:https://github.com/davimb/POO_UFC/tree/main/Ppula
 [Cinema]: https://github.com/davimb/POO_UFC/tree/main/Cinema
+[Contato]:https://github.com/davimb/POO_UFC/tree/main/Contato
