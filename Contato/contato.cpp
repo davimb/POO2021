@@ -82,9 +82,7 @@ int main() {
 
         if (cmd == "init") {
             string name = "";
-
-            if (!resto.empty())
-                ss>>name;
+            ss>>name;
 
             Contact temp(name); 
             contato = temp;
