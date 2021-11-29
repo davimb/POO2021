@@ -31,7 +31,6 @@ class Fone {
 
 class Contact {
     private:
-        string prefix;
         string name;
         vector<Fone> fones;
 
