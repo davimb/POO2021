@@ -29,7 +29,7 @@ class Sala{
         }
 
         bool reservar(shared_ptr<Client> pessoa, int pos) {
-            if(pos<0 and pos>=(int)cliente.size()) {
+            if(pos<0 or pos>=(int)cliente.size()) {
                 cout<<"fail: cadeira nao existe"<<endl;
                 return true;
             }
