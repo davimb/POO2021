@@ -29,17 +29,21 @@ class Sala{
         }
 
         bool reservar(shared_ptr<Client> pessoa, int pos) {
-            if(cliente[pos]!=nullptr) 
-                return false;
-            
-        for(int i=0;  i<(int)cliente.size(); i++) {
-            if(cliente[i]==nullptr)
-                continue;
-            if(cliente[i]->getNome()==pessoa->getNome()) {
-                cout<<"fail: ja existe um cliente com este nome"<<endl;
+            if(pos<0 and pos>=(int)cliente.size()) {
+                cout<<"fail: cadeira nao existe"<<endl;
                 return true;
             }
-        }
+            for(int i=0;  i<(int)cliente.size(); i++) {
+                if(cliente[i]==nullptr)
+                    continue;
+                if(cliente[i]->getNome()==pessoa->getNome()) {
+                    cout<<"fail: ja existe um cliente com este nome"<<endl;
+                    return true;
+                }
+            }
+            if(cliente[pos]!=nullptr) 
+                return false;
+
             cliente[pos]=pessoa;
             return true;
         }
