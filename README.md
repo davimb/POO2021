@@ -27,6 +27,15 @@
 | Atividade 8 | [Contato][] |
 | --- | --- |
 
+| Atividade 9 | [Contato2][] |
+| --- | --- |
+
+| Atividade 10 | [Contato2-Map][] |
+| --- | --- |
+
+| Atividade 11 | [Cinema-Map][] |
+| --- | --- |
+
 [Estressados]: https://github.com/davimb/POO_UFC/tree/main/Estressados
 [SimpsonsGame]: https://github.com/davimb/POO_UFC/tree/main/SimpsonsGame
 [JogoDigitacao]: https://github.com/davimb/POO_UFC/tree/main/JogoDigitacao
@@ -35,3 +44,6 @@
 [Ppula]:https://github.com/davimb/POO_UFC/tree/main/Ppula
 [Cinema]: https://github.com/davimb/POO_UFC/tree/main/Cinema
 [Contato]:https://github.com/davimb/POO_UFC/tree/main/Contato
+[Contato2]:https://github.com/davimb/POO_UFC/tree/main/Contato
+[Contato2-Map]:https://github.com/davimb/POO_UFC/tree/main/Contato
+[Cinema-Map]:https://github.com/davimb/POO_UFC/tree/main/Contato
