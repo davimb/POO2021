@@ -1,6 +1,6 @@
 # Aulas POO
 
-## - Programação orientada a objetos da turma de ciência da computação da UFC
+## - Programação orientada a objetos UFC
 
 
 | Atividade 1 | [Estressados][] |
@@ -61,4 +61,5 @@
 [Cinema-Map]:https://github.com/davimb/POO_UFC/tree/main/Contato
 [Herança-Criativa]:https://github.com/davimb/POO_UFC/tree/main/HerancaC
 [Cadastro]:https://github.com/davimb/POO_UFC/tree/main/Banco2
+[Hospital]:https://github.com/davimb/POO_UFC/tree/main/Hospital
 [Twitter]:https://github.com/davimb/POO_UFC/tree/main/Twitter
