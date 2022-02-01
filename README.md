@@ -36,6 +36,18 @@
 | Atividade 11 | [Cinema-Map][] |
 | --- | --- |
 
+| Atividade 12 | [Herança-Criativa][] |
+| --- | --- |
+
+| Atividade 13 | [Cadastro][] |
+| --- | --- |
+
+| Atividade 14 | [Hospital][] |
+| --- | --- |
+
+| Atividade 15 | [Twitter][] |
+| --- | --- |
+
 [Estressados]: https://github.com/davimb/POO_UFC/tree/main/Estressados
 [SimpsonsGame]: https://github.com/davimb/POO_UFC/tree/main/SimpsonsGame
 [JogoDigitacao]: https://github.com/davimb/POO_UFC/tree/main/JogoDigitacao
@@ -47,3 +59,6 @@
 [Contato2]:https://github.com/davimb/POO_UFC/tree/main/Contato
 [Contato2-Map]:https://github.com/davimb/POO_UFC/tree/main/Contato
 [Cinema-Map]:https://github.com/davimb/POO_UFC/tree/main/Contato
+[Herança-Criativa]:https://github.com/davimb/POO_UFC/tree/main/HerancaC
+[Cadastro]:https://github.com/davimb/POO_UFC/tree/main/Banco2
+[Twitter]:https://github.com/davimb/POO_UFC/tree/main/Twitter
