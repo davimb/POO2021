@@ -53,7 +53,7 @@ class SavingsAccount : public Account {
     }
 
     virtual void monthlyUpdate() {
-        balance += balance*0,01;
+        balance += balance*0.01;
     }
 };
 
